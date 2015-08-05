@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name                = "VideoCore"
   s.version             = "1.0.0"
   s.license             = 'MIT'
-  s.source              = { :git => "https://github.com/javenl/VideoCore", :head }
+  s.source              = { :git => "https://github.com/javenl/VideoCore.git" }
     #:tag => s.version.to_s 
 
   s.requires_arc        = false
