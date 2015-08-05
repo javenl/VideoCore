@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, VCCameraState)
 typedef NS_ENUM(NSInteger, VCAspectMode)
 {
     VCAspectModeFit,
-    VCAscpectModeFill
+    VCAspectModeFill
 };
 
 //With new filters should add an enum here
@@ -95,6 +95,7 @@ typedef NS_ENUM(NSInteger, VCFilter) {
 @property (nonatomic, assign) float         videoZoomFactor;
 @property (nonatomic, assign) int           audioChannelCount;
 @property (nonatomic, assign) float         audioSampleRate;
+@property (nonatomic, assign) float         audioBitrate;
 @property (nonatomic, assign) float         micGain;        // [0..1]
 @property (nonatomic, assign) CGPoint       focusPointOfInterest;   // (0,0) is top-left, (1,1) is bottom-right
 @property (nonatomic, assign) CGPoint       exposurePointOfInterest;

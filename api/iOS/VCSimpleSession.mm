@@ -242,7 +242,7 @@ namespace videocore { namespace simpleApi {
 {
     _aspectMode = aspectMode;
     switch (aspectMode) {
-        case VCAscpectModeFill:
+        case VCAspectModeFill:
             m_aspectMode = videocore::AspectTransform::AspectMode::kAspectFill;
             break;
         case VCAspectModeFit:
@@ -308,6 +308,16 @@ namespace videocore { namespace simpleApi {
     if(m_audioMixer) {
         m_audioMixer->setFrequencyInHz(sampleRate);
     }
+}
+- (void) setAudioBitrate:(float)audioBitrate {
+    float bit = audioBitrate;
+    if (bit < 65000) {
+        bit = 65000;
+    }
+    if (bit > 128000) {
+        bit = 128000;
+    }
+    _audioBitrate = bit;
 }
 - (float) audioSampleRate
 {
@@ -470,6 +480,7 @@ namespace videocore { namespace simpleApi {
     self.micGain = 1.f;
     self.audioChannelCount = 2;
     self.audioSampleRate = 44100.;
+    self.audioBitrate = 65000;
     self.useAdaptiveBitrate = NO;
     self.aspectMode = aspectMode;
 
@@ -803,7 +814,7 @@ namespace videocore { namespace simpleApi {
     {
         // Add encoders
 
-        m_aacEncoder = std::make_shared<videocore::iOS::AACEncode>(self.audioSampleRate, self.audioChannelCount, 96000);
+        m_aacEncoder = std::make_shared<videocore::iOS::AACEncode>(self.audioSampleRate, self.audioChannelCount, self.audioBitrate);
         if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
             // If >= iOS 8.0 use the VideoToolbox encoder that does not write to disk.
             m_h264Encoder = std::make_shared<videocore::Apple::H264Encode>(self.videoSize.width,
